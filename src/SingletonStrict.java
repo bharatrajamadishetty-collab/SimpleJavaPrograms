@@ -1,0 +1,66 @@
+import java.io.Serializable;
+
+class SingletonStrict implements Cloneable, Serializable {
+
+    private static final long serialVersionUID = -5664124213376258176L;
+
+    private static volatile SingletonStrict singleInstance;
+
+    //prevent instantiation via reflection
+    private SingletonStrict() {
+        if(singleInstance != null) {
+            throw new IllegalStateException("Use getInstance() method to create/get instance");
+        }
+    }
+
+    public static SingletonStrict getInstance() {
+        if (singleInstance == null) {
+            synchronized (SingletonStrict.class) {
+                if (singleInstance == null) {
+                    singleInstance = new SingletonStrict();
+                }
+            }
+        }
+        return singleInstance;
+    }
+
+    //prevent cloning
+    @Override 
+    protected Object clone() throws CloneNotSupportedException {
+        throw new CloneNotSupportedException("Cloning of this singleton is not allowed");
+    }
+
+    //prevent serialization/deserialization
+    protected Object readResolve() {
+        return getInstance();
+    }
+
+    public static void main(String[] args) {
+        //Attempt to create multiple instances via getInstance()
+        SingletonStrict instance1 = SingletonStrict.getInstance();
+        SingletonStrict instance2 = SingletonStrict.getInstance();
+        System.out.println(instance1);
+        System.out.println(instance2);
+
+        // Attempt to create a new instance via reflection
+        try {
+            SingletonStrict s = new SingletonStrict();
+            System.out.println(s);
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Attempt to clone the singleton instance
+        try {
+            SingletonStrict clonedInstance = (SingletonStrict) instance1.clone();
+            System.out.println(clonedInstance);
+        } catch (CloneNotSupportedException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Attempt to deserialize the singleton instance
+        Object o = instance2.readResolve();
+        System.out.println(o);
+        
+    }
+}
