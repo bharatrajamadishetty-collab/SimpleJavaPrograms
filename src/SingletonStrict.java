@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 
 class SingletonStrict implements Cloneable, Serializable {
 
@@ -34,7 +35,9 @@ class SingletonStrict implements Cloneable, Serializable {
     protected Object readResolve() {
         return getInstance();
     }
+}
 
+class TestSingletonStrict {
     public static void main(String[] args) {
         //Attempt to create multiple instances via getInstance()
         SingletonStrict instance1 = SingletonStrict.getInstance();
@@ -42,11 +45,13 @@ class SingletonStrict implements Cloneable, Serializable {
         System.out.println(instance1);
         System.out.println(instance2);
 
-        // Attempt to create a new instance via reflection
+        // Attempt to create instance via reflection
         try {
-            SingletonStrict s = new SingletonStrict();
-            System.out.println(s);
-        } catch (IllegalStateException e) {
+           java.lang.reflect.Constructor<?> ctor = Class.forName("SingletonStrict").getDeclaredConstructor();
+           ctor.setAccessible(true);
+           Object v = ctor.newInstance();
+            System.out.println(v);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
 
