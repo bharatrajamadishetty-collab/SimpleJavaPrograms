@@ -14,9 +14,11 @@ public class IdentityFunctionSortDistinct {
         Map<String, Long> languageCount = languages.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         System.out.println(languageCount);
-        //Remove duplicates
+        System.out.println("Remove duplicates using distinct");
         languages.stream().distinct().forEach(System.out::println);
-        //Remove duplicates and sort
+        System.out.println("Remove duplicates using Set");
+        languages.stream().collect(Collectors.toSet()).forEach(System.out::println);
+        //Remove duplicates and sort list in natural order
         List<String> l = languages.stream().sorted().distinct().collect(Collectors.toList());
         System.out.println(l);
         //Remove duplicates and sort in reverse order
