@@ -12,7 +12,8 @@ public static void main(String[] args) {
             new NthHighestSalaryEmployee(2, "Bob", 60000),
             new NthHighestSalaryEmployee(3, "Charlie", 55000),
             new NthHighestSalaryEmployee(4, "David", 70000),
-            new NthHighestSalaryEmployee(5, "Eve", 65000)
+            new NthHighestSalaryEmployee(5, "Eve", 65000),
+            new NthHighestSalaryEmployee(6, "Steve", 65000)
         );
 
         Scanner sc = new Scanner(System.in);
@@ -21,7 +22,7 @@ public static void main(String[] args) {
 
         double nthHighestSalary = employees.stream()
             .map(NthHighestSalaryEmployee::salary)
-            .sorted((s1, s2) -> Double.compare(s2, s1)) // Sort in descending order
+            .sorted(Comparator.reverseOrder()) // Sort in descending order
             .skip(n - 1) // Skip the first n-1 salaries
             .findFirst() // Get the nth highest salary
             .orElseThrow(() -> new IllegalArgumentException("nth highest salary not found")); // Throw an exception if n is out of bounds
@@ -29,6 +30,13 @@ public static void main(String[] args) {
         employees.stream()
             .filter(e -> e.salary() == nthHighestSalary)
             .forEach(e -> System.out.println("employee name = " + e.name()));
+
+        employees.stream()
+            .sorted(Comparator.comparingDouble(NthHighestSalaryEmployee::salary).reversed())
+            .distinct()
+            .skip(n - 1)
+            .findFirst()
+            .ifPresent(e -> System.out.println(n + "th highest salary: " + e.salary() + "\nemployee name = " + e.name()));
 
         // Alternatively, you can sort the employees by salary and then get the nth highest salary
         employees.sort(Comparator.comparingDouble(NthHighestSalaryEmployee::salary).reversed());

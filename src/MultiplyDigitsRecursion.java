@@ -3,7 +3,7 @@
 
 import java.util.Scanner;
 
-public class MultiplyDigits {
+public class MultiplyDigitsRecursion {
     public static int getProduct(int n) {
         int a = 1;
         int c = 0;
