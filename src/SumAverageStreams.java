@@ -41,7 +41,7 @@ public class SumAverageStreams {
         System.out.println("Average price of all products: " + averagePrice2);
 
         // Find the maximum and minimum priced products
-        Products p1 = products.stream().max((a,b) -> a.price()>b.price()?1:-1).get();
+        Products p1 = products.stream().max((var a,var b) -> a.price()>b.price()?1:-1).get();
 		System.out.println("Maximum valued Product Price = "+p1.price());
 
         products.stream().collect(Collectors.maxBy((a,b) -> a.price()>b.price()?1:-1))
@@ -56,26 +56,29 @@ public class SumAverageStreams {
         products.stream().collect(Collectors.minBy((a,b) -> a.price()>b.price()?1:-1))
         .ifPresent(p -> System.out.println("Minimum valued Product Price = "+p.price()));
 
-        Products p4 = products.stream().reduce((a,b) -> a.price()<b.price()?a:b).get();
+        Products p4 = products.stream().reduce((var a, var b) -> a.price()<b.price()?a:b).get();
 		System.out.println("Product with lowest price = "+p4.price());
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the price of Product = ");
-        double n = sc.nextDouble();
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Enter the price of Product = ");
+            double n = sc.nextDouble();
 
-        //Find the product with price equal to n
-        double filteredPrice = products.stream()
-                .filter(p -> p.price() == n)
-                .mapToDouble(Products::price)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No product found"));
-        System.out.println("Price of matched products : " + filteredPrice);
+            //Find the product with price equal to n
+            double filteredPrice = products.stream()
+                    .filter(p -> p.price() == n)
+                    .mapToDouble(Products::price)
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("No product found"));
+            System.out.println("Price of matched products : " + filteredPrice);
 
-        //List of products with price greater than n
-        List<Products> filteredProducts = products.stream()
-                .filter(p -> p.price() > n)
-                .collect(Collectors.toList());
-        System.out.println("Products with price greater than " + n + ": " + filteredProducts);
+            //List of products with price greater than n
+            List<Products> filteredProducts = products.stream()
+                    .filter(p -> p.price() > n)
+                    .collect(Collectors.toList());
+            System.out.println("Products with price greater than " + n + ": " + filteredProducts);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 }

@@ -14,13 +14,9 @@ class SingletonStrict implements Cloneable, Serializable {
         }
     }
 
-    public static SingletonStrict getInstance() {
+    public static synchronized SingletonStrict getInstance() {
         if (singleInstance == null) {
-            synchronized (SingletonStrict.class) {
-                if (singleInstance == null) {
-                    singleInstance = new SingletonStrict();
-                }
-            }
+            singleInstance = new SingletonStrict();
         }
         return singleInstance;
     }
@@ -28,6 +24,7 @@ class SingletonStrict implements Cloneable, Serializable {
     //prevent cloning
     @Override 
     protected Object clone() throws CloneNotSupportedException {
+        super.clone();
         throw new CloneNotSupportedException("Cloning of this singleton is not allowed");
     }
 

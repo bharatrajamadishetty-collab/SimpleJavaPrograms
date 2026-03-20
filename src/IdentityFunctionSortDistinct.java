@@ -27,7 +27,7 @@ public class IdentityFunctionSortDistinct {
         //Remove duplicates and sort each String by it's last character
         List<String> s = languages.stream().distinct().sorted(Comparator.comparing(s1 -> s1.charAt(s1.length() - 1))).collect(Collectors.toList());
         System.out.println(s);
-        List<String> t = languages.stream().distinct().sorted((x, y) -> Character.compare(x.charAt(x.length() - 1), y.charAt(y.length() - 1))).collect(Collectors.toList());
+        List<String> t = languages.stream().distinct().sorted((var x, var y) -> Character.compare(x.charAt(x.length() - 1), y.charAt(y.length() - 1))).collect(Collectors.toList());
         System.out.println(t);
     }
 

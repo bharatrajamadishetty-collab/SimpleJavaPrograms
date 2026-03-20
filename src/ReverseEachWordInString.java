@@ -13,8 +13,8 @@ public class ReverseEachWordInString {
     }
     public static void main(String []args) {
         String s = "best friends forever";
-        String b = new String();
-        String c = new String();
+        String b;
+        String c;
         StringBuilder sl = new StringBuilder();
         StringBuffer sb = new StringBuffer();
         String[] a = s.split("\\s");

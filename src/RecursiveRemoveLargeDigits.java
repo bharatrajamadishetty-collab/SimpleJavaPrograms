@@ -20,13 +20,9 @@ public class RecursiveRemoveLargeDigits {
         RecursiveRemoveLargeDigits r = new RecursiveRemoveLargeDigits();
         int n = 31462985; //Remove adjacent large digits from right to left to get smallest number 1285
         List<Integer> digits = r.getdigits(n, new ArrayList<>());
-        List<Integer> filteredNumber = IntStream.range(0, digits.size()-1).filter(x -> {
-            if(digits.get(x) > digits.get(x+1)){
-                return false;
-            }
-            return true;
-        }).mapToObj(digits::get).collect(Collectors.toList()).reversed();
-        Integer filteredNumberInt = Integer.parseInt(filteredNumber.stream().map(String::valueOf).collect(Collectors.joining()));
+        List<Integer> filteredNumber = IntStream.range(0, digits.size()-1).filter(x -> digits.get(x) < digits.get(x+1))
+        .mapToObj(digits::get).collect(Collectors.toList()).reversed();
+        int filteredNumberInt = Integer.parseInt(filteredNumber.stream().map(String::valueOf).collect(Collectors.joining()));
         System.out.println("The filtered number is "+filteredNumberInt);
     }
 

@@ -55,6 +55,10 @@ public class FutureExecutorService {
             System.out.println("Task3 is done by Thread : " + Thread.currentThread().getName());
             });
 
+        future1.get();
+        future2.get();
+        future3.get();
+
         executorService.shutdown();
     }
 

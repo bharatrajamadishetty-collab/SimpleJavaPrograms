@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.function.Predicate;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 record User(int id, String name, String role) {}
@@ -35,19 +34,20 @@ public class PredicateStreams {
         userNames.stream().filter(n -> n.startsWith("A")).forEach(System.out::println);
         userNames.stream().filter(n -> n.contains("B")).forEach(System.out::println);
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the name of User = ");
-        String name = sc.next();
+        try (Scanner sc = new Scanner(System.in)) {
+                System.out.println("Enter the name of User = ");
+                String name = sc.next();
 
-        // Find the user with the specified name
-        Predicate<User> hasName = user -> user.name().equals(name);
-        Optional<User> u = Optional.of(users.stream()
-                .filter(hasName)
-                .findFirst()
-                .get());
-                if(u.isPresent()) {
-                    System.out.println("User found with Id: " + u.get().id() + " name: " + u.get().name() + " role: " + u.get().role());
-                }
+                // Find the user with the specified name
+                Predicate<User> hasName = user -> user.name().equals(name);
+                Optional<User> u = Optional.of(users.stream()
+                        .filter(hasName)
+                        .findFirst()
+                        .get());
+                        if(u.isPresent()) {
+                            System.out.println("User found with Id: " + u.get().id() + " name: " + u.get().name() + " role: " + u.get().role());
+                        }
+        }
     }
 
 }

@@ -40,12 +40,13 @@ public class MultiplyDigitsRecursion {
         return c;
     }
     public static void main(String []args) {
-        Scanner sc  = new Scanner(System.in);
-        System.out.println("Enter the number: ");
-        int n = sc.nextInt();
-        System.out.println("Final Result = "+getProduct(n));
-        System.out.println("---------Printing using recursion----------");
-        System.out.println("Final Result using recursion = "+getProductRecursion(n,0));
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.println("Enter the number: ");
+            int n = sc.nextInt();
+            System.out.println("Final Result = "+getProduct(n));
+            System.out.println("---------Printing using recursion----------");
+            System.out.println("Final Result using recursion = "+getProductRecursion(n,0));
+        }
     }
 
 }

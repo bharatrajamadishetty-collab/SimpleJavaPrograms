@@ -1,9 +1,10 @@
+import java.util.concurrent.Executors;
 import java.util.random.RandomGenerator;
 
 public class VirtualThreadExecutor {
     static int counter(){
         int c =0;
-        for (int i = 0; i < 55; i++) {
+        for (int i = 0; i < 15; i++) {
             c++;
             System.out.println(Thread.currentThread().getName());
             System.out.println(Thread.ofVirtual().name(""));
@@ -23,6 +24,10 @@ public class VirtualThreadExecutor {
         new Thread(() -> counter()).start();
         //Virtual JVM Thread
         Thread.startVirtualThread(() -> counter());
+        //Using Executors
+        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            executor.submit(() -> counter());
+        }
 
     //Text Block
     String json = """

@@ -1,23 +1,7 @@
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-class Employee {
-    private String name;
-    private int id;
-
-    Employee(String name, int id) {
-        this.name = name;
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getId() {
-        return id;
-    }
-}
+record Employee(String name, int id) {}
 
 public class ConcurrentHashMapExample {
     public static void main(String[] args) {
@@ -28,9 +12,16 @@ public class ConcurrentHashMapExample {
         Employee e1 = new Employee("Alice", 1);
         Employee e2 = new Employee("Bob", 2);
         Employee e3 = new Employee("Charlie", 3);
-        m.put(e1.getId(), e1.getName());
-        m.put(e2.getId(), e2.getName());
-        m.put(e3.getId(), e3.getName());
+        Employee e = new Employee(null, 4);
+        Employee e4 = new Employee(null, 5);
+        m.put(e1.id(), e1.name());
+        m.put(e2.id(), e2.name());
+        m.put(e3.id(), e3.name());
+        m.forEach((k,v) -> System.out.println(k+":"+v));
+        m.putIfAbsent(e.id(), e2.name());
+        m.replace(e2.id(), e1.name());
+        m.computeIfPresent(e1.id(), (k, v) -> e3.name());
+        m.computeIfAbsent(e4.id(), k -> "Glenn");
 
         System.out.println("Initial Capacity: " + initialCapacity);
         System.out.println("Load Factor: " + loadFactor);

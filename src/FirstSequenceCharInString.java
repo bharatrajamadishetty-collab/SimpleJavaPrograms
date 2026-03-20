@@ -5,8 +5,8 @@ public class FirstSequenceCharInString {
     public static void main(String []args) {
         List<String> sl = Arrays.asList("flow", "flower", "flight", "flute", "flex");
         String t = sl.get(0);
-        String g = "";
-        String r = "";
+        String g;
+        String r = null;
         for(int i=0; i<t.length(); i++) {
             g = t.substring(0, i+1);
             int c = 0;

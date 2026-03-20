@@ -4,7 +4,7 @@ public class BalancedString {
 static boolean isBalancedString(String b) {
         char c;
         char d;
-        Stack<Character> s = new Stack<Character>();
+        Stack<Character> s = new Stack<>();
         for(int i=0; i<b.length(); i++) {
             c = b.charAt(i);
             if(c == '(' || c == '[' || c == '{') {
@@ -15,24 +15,24 @@ static boolean isBalancedString(String b) {
                 return false;
             }
             switch(c) {
-            case ')' :
+            case ')' -> {
                 d = s.pop();
                 if(d != '(') {
                     return false;
                 }
-                break;
-            case ']' :
+                }
+            case ']' -> {
                 d = s.pop();
                 if(d != '[') {
                     return false;
                 }
-                break;
-            case '}' :
+                }
+            case '}' -> {
                 d = s.pop();
                 if(d != '{') {
                     return false;
                 }
-                break;
+                }
             }
         }
         return (s.isEmpty());
