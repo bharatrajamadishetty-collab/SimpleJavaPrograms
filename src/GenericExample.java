@@ -10,13 +10,17 @@ public class GenericExample<T> {
     }
     public static void main(String[] args) {
         GenericExample<Integer> g1 = new GenericExample<>();  // Box is now type-safe
-        g1.setValue(1);  
-        Integer i = g1.getValue();  
-        System.out.println(i);
+        g1.setValue(13);
+        if(g1.getValue() instanceof Integer i){
+            i = g1.getValue();  
+            System.out.println(i);
+        }  
         GenericExample<String> g2 = new GenericExample<>();  // Box is now type-safe
-        g2.setValue("Hello");  
-        String s = g2.getValue();  
-        System.out.println(s);
+        g2.setValue("Hello");
+        if(g2.getValue() instanceof String s){  
+            s = g2.getValue();  
+            System.out.println(s);
+        }
         GenericExample<Double> g3 = new GenericExample<>();  // Box is now type-safe
         g3.setValue(3.14);  
         Double d = g3.getValue();  
