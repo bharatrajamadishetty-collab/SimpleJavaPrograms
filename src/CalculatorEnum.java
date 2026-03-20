@@ -1,3 +1,6 @@
+
+import java.util.Scanner;
+
 public enum CalculatorEnum {
     ADD, SUBTRACT, MULTIPLY, DIVIDE;
 
@@ -8,19 +11,24 @@ public enum CalculatorEnum {
             case SUBTRACT ->
                 a.doubleValue() - b.doubleValue();
             case MULTIPLY ->
-                a.doubleValue() * b.doubleValue();
+                a.equals(0) || b.equals(0)? 0 : a.doubleValue() * b.doubleValue();
             case DIVIDE ->
-                a.doubleValue() / b.doubleValue();
+                a.equals(0) && b.equals(0)? 0 : a.doubleValue() / b.doubleValue();
             default ->
                 throw new AssertionError("Unknown operation: " + this);
         };
     }
 
     public static void main(String[] args) {
-        System.out.println(DIVIDE.apply(75, 5));
-        System.out.println(ADD.apply(10, 20));
-        System.out.println(MULTIPLY.apply(5.5, 4));
-        System.out.println(SUBTRACT.apply(39.5, 14));
+        System.out.println("Enter 2 double values to calculate : ");
+        try (Scanner sc = new Scanner(System.in)) {
+            double x = sc.nextDouble();
+            double y = sc.nextDouble();
+            System.out.println(DIVIDE.apply(x, y));
+            System.out.println(ADD.apply(x, y));
+            System.out.println(MULTIPLY.apply(x, y));
+            System.out.println(SUBTRACT.apply(x, y));
+        }
     }
 
 }
