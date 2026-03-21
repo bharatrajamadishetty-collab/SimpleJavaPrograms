@@ -47,4 +47,14 @@ record User(int id, String name, String role) {}
                             System.out.println("User found with Id: " + u.get().id() + " name: " + u.get().name() + " role: " + u.get().role());
                         }
         }
+
+        List<List<String>> nameList = Arrays.asList(
+                Arrays.asList("Alice", "Bob"),
+                Arrays.asList("David", "Charlie"),
+                Arrays.asList("Clarke", "Peter")
+        );
+        //using flatmap to flatten list
+        List<String> names = nameList.stream().flatMap(x -> x.stream()).collect(Collectors.toList());
+        System.out.println("Names List Pair : " + nameList);
+        System.out.println("Flattened Names List : " + names);
     }
