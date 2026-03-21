@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 record Products(int id, String name, double price) {}
 
-public class SumAverageStreams {
+//Using Unnamed Class
     public static void main(String[] args) {
         List<Products> products = Arrays.asList(
                 new Products(1, "Laptop", 38999.99),
@@ -81,4 +81,3 @@ public class SumAverageStreams {
         }
 
     }
-}

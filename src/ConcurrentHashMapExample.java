@@ -14,7 +14,10 @@ public class ConcurrentHashMapExample {
         Employee e3 = new Employee("Charlie", 3);
         Employee e = new Employee(null, 4);
         Employee e4 = new Employee(null, 5);
-        m.put(e1.id(), e1.name());
+        //Using Record Patterns
+        if(e1 instanceof Employee(String name, int id)){
+            m.put(id, name);
+        }
         m.put(e2.id(), e2.name());
         m.put(e3.id(), e3.name());
         m.forEach((k,v) -> System.out.println(k+":"+v));

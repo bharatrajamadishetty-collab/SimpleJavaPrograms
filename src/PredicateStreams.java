@@ -6,8 +6,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 record User(int id, String name, String role) {}
-
-public class PredicateStreams {
+//Using Unnamed Class
     public static void main(String args[]) {
         List<User> users = Arrays.asList(
                 new User(1, "Alice", "admin"),
@@ -49,5 +48,3 @@ public class PredicateStreams {
                         }
         }
     }
-
-}

@@ -2,7 +2,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class RepeatedCharCount {
+//Using Unnamed Class
 public static void main(String []args) {
         String s = " Don  Bradman ";
         s = s.replaceAll("\\s*","");
@@ -16,4 +16,3 @@ public static void main(String []args) {
             }
         }
     }
-}

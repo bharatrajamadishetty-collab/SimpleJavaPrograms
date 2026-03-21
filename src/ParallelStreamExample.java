@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 record Employee(String name, int id) {}
-
-public class ParallelStreamExample {
+//Using Unnamed Class
     public static void main(String[] args) {
         List<Employee> employees = Arrays.asList(
             new Employee("Alice", 1),
@@ -30,5 +29,3 @@ public class ParallelStreamExample {
         System.out.println("Ordered Employee Details:");
         employees.parallelStream().forEachOrdered(e -> System.out.println("Employee Name: " + e.name() + ", Employee ID: " + e.id() + " , using Thread : " + Thread.currentThread().getName()));   
     }
-
-}
