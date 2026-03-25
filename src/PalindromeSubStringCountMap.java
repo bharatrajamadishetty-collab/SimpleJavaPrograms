@@ -3,10 +3,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class PalindromeSubStringCountMap {
+    //Using IntSream
+    static boolean palindromeStream(String d) {
+        return IntStream.range(0, d.length()/2)
+        .allMatch(x -> d.charAt(x) == d.charAt(d.length()-1-x));
+    }
 
-    public static boolean palindromeCheck(String t) {
+    //Using StringBuilder reverse
+    static boolean palindromeCheck(String t) {
         StringBuilder sb = new StringBuilder();
         sb.append(t);
         sb.reverse();
@@ -18,12 +25,10 @@ public class PalindromeSubStringCountMap {
         String s = "Besties forever are always together";
         s = s.replace(" ","");
         List<Integer> len = new ArrayList<>();
-        boolean ispalindrome;
         for(int i=0; i<s.length()-1; i++) {
             for(int j=i+1; j<s.length(); j++) {
                 a = s.substring(i,j+1);
-                ispalindrome = palindromeCheck(a);
-                if(ispalindrome) {
+                if(palindromeCheck(a) && palindromeStream(a)) {
                     m.put(a,a.length());
                     System.out.println("subString "+ a +" is a palindrome");
                     len.add(a.length());
