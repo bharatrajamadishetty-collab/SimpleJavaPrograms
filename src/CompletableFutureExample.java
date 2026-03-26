@@ -48,5 +48,12 @@ class CompletableFutureExample {
 
         System.out.println("Future1 Result = " + f1.get());
         System.out.println("Future2 Result = " + f2.get());
+
+        CompletableFuture<Integer> c = CompletableFuture.supplyAsync(() -> add(34,87));
+        CompletableFuture<Integer> d = CompletableFuture.supplyAsync(() -> divide(45, 17));
+        CompletableFuture<Integer> e = c.thenCombine(d, (f,g) -> divide(f, g));
+        CompletableFuture<Integer> h = e.thenCombine(c, Data::new).thenCompose(data -> CompletableFuture.supplyAsync(() -> add(data.k,data.l)));
+        System.out.println(c.get()+" "+d.get()+" "+e.get()+" "+h.get());
     }
+    record Data(Integer k, Integer l){}
 }
