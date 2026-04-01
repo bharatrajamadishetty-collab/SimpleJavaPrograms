@@ -31,6 +31,7 @@ public class ConcurrentHashMapExample {
         System.out.println("Concurrency Level: " + concurrencyLevel);
 
         for(Map.Entry<Integer, String> entry : m.entrySet()) {
+            m.put(e3.id(), e2.name()); // No Concurrent modification exception
             System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue() + " , using Thread : " + Thread.currentThread().getName());
         }
     }
