@@ -1,4 +1,6 @@
 
+import java.util.stream.IntStream;
+
 class ReverseStringMultipleWays {
     static String reverseSwapString(String a) {
         char[] c = a.toCharArray();
@@ -26,7 +28,14 @@ class ReverseStringMultipleWays {
         return sb.toString();
     }
 
-    static String reversewithStreamMap(String f) {
+    // using IntStream.range() and mapToObj()
+    static String reversewithIntStream(String h) {
+        return IntStream.range(0, h.length()).mapToObj(p -> h.charAt(h.length() - 1 - p))
+                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
+    }
+
+    // using chars()
+    static String reversewithCharsStreamMap(String f) {
         return f.chars().mapToObj(m -> f.charAt(f.length() - 1 - f.indexOf(m)))
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
     }
@@ -43,7 +52,8 @@ class ReverseStringMultipleWays {
         String s = "danger";
         System.out.println("reversed string = " + reverseSwapString(s));
         System.out.println("reversed string = " + reverseStringBuilder(s));
-        System.out.println("reversed string = " + reversewithStreamMap(s));
+        System.out.println("reversed string = " + reversewithIntStream(s));
+        System.out.println("reversed string = " + reversewithCharsStreamMap(s));
         System.out.println("reversed string = " + reverseWithStreamForEach(s));
         System.out.println("reversed string = " + reverseString("superman"));
     }

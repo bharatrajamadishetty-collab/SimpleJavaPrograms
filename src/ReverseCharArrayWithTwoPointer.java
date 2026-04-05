@@ -74,7 +74,7 @@ public class ReverseCharArrayWithTwoPointer {
     }
 
     static char[] reverseArrayUsingStreamsMap(char[] e) {
-        return IntStream.range(0, e.length).mapToObj(m -> (char) e[e.length - 1 - m])
+        return IntStream.range(0, e.length).mapToObj(m -> e[e.length - 1 - m])
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString().toCharArray();
     }
 
