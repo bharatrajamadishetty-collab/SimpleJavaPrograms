@@ -75,6 +75,6 @@ record User(int id, String name, String role) {}
         Queue<List<String>> q = new ConcurrentLinkedQueue<>();
         q.add(Arrays.asList("Peter", "Bob"));
         q.add(Arrays.asList("Henry", "James"));
-        List<String> flatQueue = q.stream().flatMap(f -> f.stream()).collect(Collectors.toList());
+        List<String> flatQueue = q.stream().flatMap(List::stream).collect(Collectors.toList());
         System.out.println("Flattened queue list = "+flatQueue);
     }
