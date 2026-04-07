@@ -2,7 +2,7 @@
 import java.util.LinkedList;
 import java.util.List;
 
-public class OpenCloseClearOnChoice {
+public class IBMOpenCloseClearOnChoice {
     static List<String> operations(List<String> list) {
         LinkedList<String> result = new LinkedList<>();
         list.forEach(s -> {
