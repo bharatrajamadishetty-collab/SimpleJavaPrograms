@@ -12,6 +12,12 @@ public class WordsInStringManipulations {
                                 .collect(Collectors.joining(" "));
         }
 
+        static String reverseCharsInEachWord(String a) {
+                return Stream.of(a.split("\\s+")).map(word -> Stream.of(word.split(""))
+                                .reduce("", (x, y) -> y + x))
+                                .collect(Collectors.joining(" "));
+        }
+
         static String wordsInReverseSequenceOrder(String b) {
                 return Stream.of(b.split("\\s+")).collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
                         Collections.reverse(list);
@@ -51,6 +57,8 @@ public class WordsInStringManipulations {
 
                 System.out.println(
                                 "Printing all reversed characters in each word : " + reverseChararactersInEachWord(s));
+                System.out.println(
+                                "Printing all reversed characters in each word : " + reverseCharsInEachWord(s));
                 System.out.println("Printing all words in reverse sequence order : " + wordsInReverseSequenceOrder(s));
                 System.out.println("Printing all words in reverse sequence order : "
                                 + wordsInReverseSequenceUsingIntStream(s));
