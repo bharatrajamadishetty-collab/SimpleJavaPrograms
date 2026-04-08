@@ -9,14 +9,14 @@ record Product(int id, String name, double price, String model) implements Compa
         return Double.compare(this.price, other.price);
     }
 }
-class NameComparator implements Comparator<Product> {
+record NameComparator() implements Comparator<Product> {
     @Override
     public int compare(Product p1, Product p2) {
         return p1.name().compareTo(p2.name());
     }
 }
 
-public class CustomSortComparator {
+public record CustomSortComparator() {
     public static void main(String[] args) {
         List<Product> products = Arrays.asList(
                 new Product(1, "Laptop", 38999.99, "XPS 15"),
