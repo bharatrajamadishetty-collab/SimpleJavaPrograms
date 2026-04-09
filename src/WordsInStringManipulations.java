@@ -37,6 +37,11 @@ public class WordsInStringManipulations {
                 return IntStream.range(0, h.length).mapToObj(k -> h[h.length - 1 - k]).collect(Collectors.joining(" "));
         }
 
+        static String reverseWordsAndChars(String d) {
+                return Stream.of(d.split("\\s+")).map(word -> Stream.of(word.split(""))
+                                .reduce("", (x, y) -> y + x)).reduce("", (x, y) -> y + " " + x);
+        }
+
         public static void main(String[] args) {
                 String s = "I am a      software developer.";
                 Optional<String> secondLargest = Arrays.stream(s.replaceAll("[^a-zA-Z\\s]", "").split("\\s+"))
@@ -64,6 +69,8 @@ public class WordsInStringManipulations {
                                 + wordsInReverseSequenceUsingIntStream(s));
                 System.out.println("Printing all words in reverse sequence order with all characters also reversed : "
                                 + reverseWordsAndCharacters(s));
+                System.out.println("Printing all words in reverse sequence order with all characters also reversed : "
+                                + reverseWordsAndChars(s));
 
         }
 
