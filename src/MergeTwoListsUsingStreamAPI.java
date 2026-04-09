@@ -2,6 +2,8 @@
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MergeTwoListsUsingStreamAPI {
@@ -27,6 +29,13 @@ public class MergeTwoListsUsingStreamAPI {
 
         List<Double> l = Stream.generate(Math::random).limit(4).sorted(Comparator.reverseOrder()).toList();
         System.out.println(l);
+
+        Stream.of(6.5, 9, 3, 4.3, 1.2, 7).sorted((i, j) -> Double.compare(i.doubleValue(), j.doubleValue()))
+                .forEach(System.out::println);
+
+        Map<Boolean, List<Integer>> map = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9)
+                .collect(Collectors.partitioningBy(n -> n % 2 == 0));
+        System.out.println(map);
 
     }
 

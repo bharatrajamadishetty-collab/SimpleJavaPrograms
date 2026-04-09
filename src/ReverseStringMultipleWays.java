@@ -1,5 +1,6 @@
 
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 class ReverseStringMultipleWays {
     static String reverseSwapString(String a) {
@@ -48,6 +49,11 @@ class ReverseStringMultipleWays {
         return r.toString();
     }
 
+    // reverse using reduce()
+    static String reduceToReverseString(String t) {
+        return Stream.of(t.split("")).reduce("", (i, j) -> j + i);
+    }
+
     public static void main(String args[]) {
         String s = "danger";
         System.out.println("reversed string = " + reverseSwapString(s));
@@ -56,5 +62,6 @@ class ReverseStringMultipleWays {
         System.out.println("reversed string = " + reversewithCharsStreamMap(s));
         System.out.println("reversed string = " + reverseWithStreamForEach(s));
         System.out.println("reversed string = " + reverseString("superman"));
+        System.out.println("reversed string = " + reduceToReverseString("superman"));
     }
 }

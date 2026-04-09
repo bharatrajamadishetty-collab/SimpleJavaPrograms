@@ -56,6 +56,11 @@ public class WordsInStringManipulations {
                                 .sorted(Comparator.comparingInt(String::length).reversed()).findFirst();
                 first.ifPresent(length -> System.out.println("Largest word : " + length));
 
+                String t = Stream.of(s.toLowerCase().replaceAll("[^a-z\\s]", "").split("\\s+"))
+                                .max(Comparator.comparing(String::length))
+                                .orElse("");
+                System.out.println("Largest word : " + t);
+
                 Optional<Integer> max = Arrays.stream(s.split("[^a-zA-Z\\\\s+]")).map(i -> i.length())
                                 .max(Comparator.naturalOrder());
                 max.ifPresent(length -> System.out.println("Length of largest word : " + length));

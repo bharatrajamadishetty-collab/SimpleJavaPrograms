@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 record EmployeeX(int id, String name, String dept, double salary) {
@@ -16,7 +17,7 @@ public class DepartmentWiseSalary {
                                 new EmployeeX(2, "Bob", "IT", 60000),
                                 new EmployeeX(3, "Charlie", "Finance", 55000),
                                 new EmployeeX(4, "David", "IT", 70000),
-                                new EmployeeX(5, "Dwane", "HR", 150000),
+                                new EmployeeX(5, "Andy", "HR", 150000),
                                 new EmployeeX(6, "Peter", "Finance", 50000),
                                 new EmployeeX(7, "Alice", "IT", 90000));
 
@@ -61,6 +62,11 @@ public class DepartmentWiseSalary {
                                 .map(Map.Entry::getKey)
                                 .toList();
                 System.out.println("List of Employees in more two or more departments : " + nameList);
+
+                Entry<Character, Long> maxChar = employees.stream().map(e -> e.name().charAt(0))
+                                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                                .entrySet().stream().max(Map.Entry.comparingByValue()).get();
+                System.out.println("Most common first letter of employee names : " + maxChar);
         }
 
 }
