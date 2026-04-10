@@ -33,10 +33,10 @@ public record SalaryRangeGrouping() {
         Emp emp = l.stream().sorted((a, b) -> Double.compare(b.sal(), a.sal())).skip(2).findFirst().get();
         System.out.println("Third highest salaried employee : " + emp);
         l.sort((a, b) -> Double.compare(b.sal(), a.sal()));
-        System.out.println(l);
+        System.out.println("\nEmployees sorted with their salaries from highest to lowest  : " + l);
 
         var map = l.stream().collect(Collectors.groupingBy(e -> getSalaryRange(e.sal())));
-        System.out.println(map);
+        System.out.println("\nEmployees grouped within their salary range  : " + map);
 
     }
 

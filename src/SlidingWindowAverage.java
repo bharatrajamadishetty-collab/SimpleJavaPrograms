@@ -10,6 +10,18 @@ public class SlidingWindowAverage {
                 .mapToObj(i -> l.subList(i, window + i))
                 .map(m -> m.stream().mapToInt(Integer::intValue).average().getAsDouble()).toList();
         System.out.println(average);
+
+        List<Integer> h = Arrays.asList(2, -2, 6, -9, 9, 1, -1);
+        int w = 2;
+        List<Integer> sum = IntStream.range(0, h.size() - (w - 1))
+                .mapToObj(j -> h.subList(j, w + j))
+                .map(m -> m.stream().mapToInt(x -> x).sum()).filter(x -> x != 0).toList();
+        System.out.println("Non zero sums of sublists : " + sum);
+
+        List<List<Integer>> a = IntStream.range(0, h.size() - (w - 1))
+                .mapToObj(k -> h.subList(k, w + k)).filter(f -> f.stream().mapToInt(p -> p).sum() != 0).toList();
+        System.out.println("List of Sublists with non zero sum : " + a);
+
     }
 
 }
