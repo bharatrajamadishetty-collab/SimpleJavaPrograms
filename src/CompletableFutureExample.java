@@ -1,4 +1,5 @@
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
 
 class CompletableFutureExample {
     private static Integer add(Integer a, Integer b) {
@@ -52,8 +53,9 @@ class CompletableFutureExample {
         System.out.println("Future1 Result = " + f1.get());
         System.out.println("Future2 Result = " + f2.get());
 
-        CompletableFuture<Integer> c = CompletableFuture.supplyAsync(() -> add(34, 87));
-        CompletableFuture<Integer> d = CompletableFuture.supplyAsync(() -> divide(45, 17));
+        var executorService = Executors.newFixedThreadPool(2);
+        CompletableFuture<Integer> c = CompletableFuture.supplyAsync(() -> add(34, 87), executorService);
+        CompletableFuture<Integer> d = CompletableFuture.supplyAsync(() -> divide(45, 17), executorService);
         CompletableFuture<Integer> p = CompletableFuture.supplyAsync(() -> add(69, 73)).thenApply(s -> divide(s, 10));
         CompletableFuture<Integer> e = c.thenCombine(d, (f, g) -> divide(f, g));
         CompletableFuture<Integer> h = e.thenCombine(c, Data::new)
