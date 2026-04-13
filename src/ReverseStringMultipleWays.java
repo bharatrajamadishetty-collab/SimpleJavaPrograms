@@ -1,4 +1,5 @@
 
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -35,33 +36,29 @@ class ReverseStringMultipleWays {
                 .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
     }
 
-    // using chars()
-    static String reversewithCharsStreamMap(String f) {
-        return f.chars().mapToObj(m -> f.charAt(f.length() - 1 - f.indexOf(m)))
-                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
+    static String reverseIntStream(String t) {
+        return IntStream.range(0, t.length()).mapToObj(q -> String.valueOf(t.charAt(t.length() - 1 - q)))
+                .collect(Collectors.joining(""));
     }
 
-    static String reverseWithStreamForEach(String g) {
-        StringBuilder r = new StringBuilder();
-        g.chars().forEach(x -> {
-            r.append(g.charAt(g.length() - 1 - g.indexOf(x)));
-        });
-        return r.toString();
+    // using chars()
+    static String reversewithCharsStreamMap(String f) {
+        return f.chars().mapToObj(m -> String.valueOf((char) m)).reduce((u, v) -> v + u).get();
     }
 
     // reverse using reduce()
     static String reduceToReverseString(String t) {
-        return Stream.of(t.split("")).reduce("", (i, j) -> j + i);
+        return Stream.of(t.split("")).reduce((i, j) -> j + i).get();
     }
 
     public static void main(String args[]) {
-        String s = "danger";
+        String s = "pipeline";
         System.out.println("reversed string = " + reverseSwapString(s));
         System.out.println("reversed string = " + reverseStringBuilder(s));
         System.out.println("reversed string = " + reversewithIntStream(s));
         System.out.println("reversed string = " + reversewithCharsStreamMap(s));
-        System.out.println("reversed string = " + reverseWithStreamForEach(s));
-        System.out.println("reversed string = " + reverseString("superman"));
-        System.out.println("reversed string = " + reduceToReverseString("superman"));
+        System.out.println("reversed string = " + reverseString("pipeline"));
+        System.out.println("reversed string = " + reduceToReverseString("pipeline"));
+        System.out.println("reversed string = " + reverseIntStream("pipeline"));
     }
 }
