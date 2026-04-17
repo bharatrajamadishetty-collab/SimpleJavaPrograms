@@ -20,10 +20,19 @@ public class RemoveDuplicatesSortedArray {
         return Arrays.copyOf(d, i + 1);
     }
 
+    static int[] removeThirdFrequentNumbers(int[] e) {
+        return IntStream.range(0, e.length)
+                .filter(i -> i == 0 || i == 1 || e[i] != e[i - 2])
+                .map(i -> e[i])
+                .toArray();
+    }
+
     public static void main(String[] args) {
         int[] a = { 1, 1, 2, 3, 4, 4, 6, 7, 7, 7, 8, 9, 9, 9 };
         System.out.println(Arrays.toString(removeDuplicatesUsingIntStream(a)));
         System.out.println(Arrays.toString(removeDuplicates(a)));
+        int[] c = { 1, 1, 1, 3, 4, 4, 6, 7, 7, 7, 8, 9, 9, 9 };
+        System.out.println(Arrays.toString(removeThirdFrequentNumbers(c)));
     }
 
 }
