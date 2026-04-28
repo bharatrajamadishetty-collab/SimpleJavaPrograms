@@ -16,19 +16,14 @@ class CreditCard implements PaymentRedirect {
     }
 }
 
-public class PaymentGateway {
-    private final PaymentRedirect pr;
-
-    PaymentGateway(PaymentRedirect p) {
-        this.pr = p;
-    }
+public class PaymentGatewayStrategyPattern {
 
     public static void main(String[] args) {
         double amount = 1000;
-        PaymentGateway ppal = new PaymentGateway(new PayPal());
-        ppal.pr.processPayment(amount);
+        PaymentRedirect ppal = new PayPal();
+        ppal.processPayment(amount);
 
-        PaymentGateway cc = new PaymentGateway(new CreditCard());
-        cc.pr.processPayment(amount);
+        PaymentRedirect cc = new CreditCard();
+        cc.processPayment(amount);
     }
 }

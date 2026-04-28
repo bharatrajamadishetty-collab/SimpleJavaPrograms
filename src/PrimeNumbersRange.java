@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-public class Prime {
+public class PrimeNumbersRange {
     static void primeNumbers(int n) {
         List<Integer> l = IntStream.rangeClosed(2, n)
                 .filter(j -> IntStream.rangeClosed(2, (int) Math.sqrt(j))
