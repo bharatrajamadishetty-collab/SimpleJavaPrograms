@@ -41,6 +41,7 @@ class CompletableFutureExample {
                         .exceptionally(ex -> 0)
                         .thenAccept(r -> {
                             // 0 - returned by exceptionally block
+                            r = add(r, 50);
                             System.out.println(
                                     "Future3 Result = " + r + " , using Thread : " + Thread.currentThread().getName());
                         });
@@ -59,6 +60,7 @@ class CompletableFutureExample {
         CompletableFuture<Integer> p = CompletableFuture.supplyAsync(() -> add(69, 73)).thenApply(s -> divide(s, 10))
                 .whenComplete((result, ex) -> {
                     if (ex != null) {
+                        // program terminates if there is exception
                         System.out.println("Exception occurred: " + ex.getMessage());
                     }
                 }).thenApply(r -> r * 2);
