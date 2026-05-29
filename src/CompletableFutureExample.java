@@ -56,7 +56,12 @@ class CompletableFutureExample {
         var executorService = Executors.newFixedThreadPool(2);
         CompletableFuture<Integer> c = CompletableFuture.supplyAsync(() -> add(34, 87), executorService);
         CompletableFuture<Integer> d = CompletableFuture.supplyAsync(() -> divide(45, 17), executorService);
-        CompletableFuture<Integer> p = CompletableFuture.supplyAsync(() -> add(69, 73)).thenApply(s -> divide(s, 10));
+        CompletableFuture<Integer> p = CompletableFuture.supplyAsync(() -> add(69, 73)).thenApply(s -> divide(s, 10))
+                .whenComplete((result, ex) -> {
+                    if (ex != null) {
+                        System.out.println("Exception occurred: " + ex.getMessage());
+                    }
+                }).thenApply(r -> r * 2);
         CompletableFuture<Integer> e = c.thenCombine(d, (f, g) -> divide(f, g));
         CompletableFuture<Integer> h = e.thenCombine(c, Data::new)
                 .thenCompose(data -> CompletableFuture.supplyAsync(() -> add(data.k, data.l)));
